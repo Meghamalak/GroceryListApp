@@ -1,0 +1,100 @@
+<div>
+  <h1> Grocery List Manager </h1>
+  <br>
+  <br>
+
+  <!-- Begin main container which holds the whole page -->
+  <div class="container-fluid" id="fluid-container" width="100%" height="100%">
+    <!-- Begin title div -->
+    <div class="jumbotron jumbotron-fluid" id="jumbotron-container" style="width: 80%; margin: auto;">
+      <!-- Begin input textbox and button div -->
+      <div class="container">
+        <input type="text" class="form-control" placeholder="Enter Grocery Item" id="txtSearch" aria-label="Name"
+          aria-describedby="button-addon1" [(ngModel)]="item.name" />
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" id="add-to-cart-icon" (click)="addItemToList()">
+            <i class="fa fa-cart-plus"></i>
+          </button>
+        </div>
+      </div>
+      <!-- End of input textbox and button div -->
+    </div>
+    <!--End of title div-->
+
+    <br />
+
+    <!-- Begin message div -->
+    <div style="width: 80%; margin: auto;">
+      <span [hidden]="hideDuplicateMsg" class="text-secondary-float-left">{{
+        duplicateMsg
+      }}</span>
+      <span [hidden]="hideValidDataMsg" class="text-danger-float-left">{{
+        validDataMsg
+      }}</span>
+      <span [hidden]="hideDelItemSuccessMsg" class="text-secondary-float-left">{{
+        delItemSuccessMsg
+      }}</span>
+      <span [hidden]="hideClearItemMsg" class="text-secondary-float-left">{{
+        clearItemMsg
+      }}</span>
+    </div>
+    <!-- End of title div -->
+  </div>
+  <!-- End of container -->
+
+  <!-- Begin display -->
+  <!-- Begin display div -->
+  <div style="width: 80%; margin: auto; text-decoration: aliceblue;">
+    <br />
+    <!-- Begin no of items -->
+    <div style="text-decoration: aqua;">
+      <span *ngIf="list" class="text-secondary-float-left">
+        <b> Number of items in your list: {{ list.length }}</b>
+      </span>
+      <button [hidden]="hideClearAllText" class="btn text-danger float-right hover-cursor" type="button"
+        id="clearAllItemsBtn" (click)="clearAllItemsFromList()">
+        {{ clearAllText }}
+      </button>
+    </div>
+    <!-- End no of items -->
+    <br />
+    <br />
+    <!-- Begin display of items in the form of list -->
+    <div>
+      <!-- Begin strikethrough info -->
+      <div style="width: 80%; margin: auto;">
+        <p [hidden]="hideStrikeThroughMsg" class="text-info">
+          <small>{{ strikeThroughMessage }}</small>
+        </p>
+      </div>
+      <!-- End strikethrough info -->
+      <ul class="list-group" style="margin: auto;">
+        <li class="list-group-item" *ngFor="let item of list">
+          <span [ngClass]="{'strike': item.strike}">
+            {{ item.name }}
+          </span>
+          <span>
+            <button class="btn text-secondary float-right hover-cursor" type="button" id="strikeListItemBtn"
+              (click)="strikeListItem(item)">
+              <i class="fa fa-strikethrough"></i>
+            </button>
+          </span>
+          <span>
+            <button class="btn text-danger float-right hover-cursor" type="button" id="deleteListItemBtn"
+              (click)="delListItem(item)">
+              <i class="fa fa-trash-alt"></i>
+            </button>
+          </span>
+          <span>
+            <button class="btn text-secondary float-right hover-cursor" type="button" id="editListItemBtn"
+              (click)="editListItem(item)">
+              <i class="fa fa-pencil-alt"></i>
+            </button>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <!-- End display of items in the form of list -->
+  </div>
+  <!-- End display div -->
+</div>
